@@ -1,0 +1,15 @@
+config:
+  # please use your own load balancer URL below!
+  target: http://flask-app-1720918713.us-east-1.elb.amazonaws.com/
+  phases:
+    - duration: 30
+      arrivalRate: 700
+      name: Spike phase
+  plugins:
+    metrics-by-endpoint: {}
+scenarios:
+  - flow:
+      - loop:
+          - get:
+              url: '/'
+        count: 1
