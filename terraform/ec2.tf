@@ -14,7 +14,7 @@ resource "aws_instance" "default" {
   user_data                   = templatefile("userdata.sh", { "account_id" : data.aws_caller_identity.current.account_id, "region" : data.aws_region.current.name })
   user_data_replace_on_change = true
   vpc_security_group_ids      = [aws_security_group.instance.id]
-  subnet_id                   = data.aws_subnets.default.ids[0]
+  subnet_id                   = coalesce([for x, y in data.aws_subnet.default : y.availability_zone_id == "use1-az1" ? x : null]...)
   iam_instance_profile        = aws_iam_instance_profile.default.name
 }
 
