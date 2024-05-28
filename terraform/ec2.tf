@@ -24,7 +24,7 @@ data "aws_vpc" "default" {
 
 # security group for instances
 resource "aws_security_group" "instance" {
-  name   = "webserver-${terraform.workspace}"
+  name   = "webserver-${terraform.workspace}2"
   vpc_id = data.aws_vpc.default.id
 }
 
